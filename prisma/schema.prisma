@@ -7,7 +7,69 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Food {
+enum Role {
+  ADMIN
+  USER
+}
+
+enum CategoryType {
+  Phim_2D
+  Phim_3D
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  nameUser String
+  phone    String
+  email    String
+  passWord String
+  role     Role
+}
+
+model Movie {
+  id          Int      @id @default(autoincrement())
+  nameMovie   String
+  description String
+  author      String
+  thumbnail   String[]
+  timeMovie   Int
+}
+
+model MovieCategory {
   id   Int    @id @default(autoincrement())
   name String
+}
+
+model MovieType {
+  id       Int          @id @default(autoincrement())
+  category CategoryType
+  price    Int
+}
+
+model Showtimes {
+  id            Int      @id @default(autoincrement())
+  time          DateTime
+  scheduledFare Int
+}
+
+model Oder {
+  id Int @id @default(autoincrement())
+}
+
+model Room {
+  id          Int    @id @default(autoincrement())
+  name        String
+  numberChair Int
+}
+
+model Coupon {
+  id       Int    @id @default(autoincrement())
+  name     String
+  discount Int
+}
+
+model Slide {
+  id    Int    @id @default(autoincrement())
+  link  String
+  image String
 }

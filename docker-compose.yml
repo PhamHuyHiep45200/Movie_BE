@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - 5000:3000
     depends_on:
       - postgres
     env_file:
@@ -32,7 +32,7 @@ services:
     volumes:
       - pgadmin:/var/lib/pgadmin
     ports:
-      - "9003:80"
+      - '9003:80'
 
 volumes:
   postgres:
