@@ -24,6 +24,7 @@ model User {
   email    String
   passWord String
   role     Role
+  Oder     Oder[]
 }
 
 model Movie {
@@ -33,39 +34,66 @@ model Movie {
   author      String
   thumbnail   String[]
   timeMovie   Int
+
+  movieType     MovieType       @relation(fields: [movieTypeId], references: [id])
+  movieTypeId   Int
+  MovieCategory MovieCategory[]
 }
 
 model MovieCategory {
   id   Int    @id @default(autoincrement())
   name String
+
+  movieCategory   Movie @relation(fields: [movieCategoryId], references: [id])
+  movieCategoryId Int
 }
 
 model MovieType {
   id       Int          @id @default(autoincrement())
   category CategoryType
   price    Int
+
+  showtimesType   Showtimes @relation(fields: [showtimesTypeId], references: [id])
+  showtimesTypeId Int
+  Movie           Movie[]
 }
 
 model Showtimes {
   id            Int      @id @default(autoincrement())
   time          DateTime
   scheduledFare Int
+
+  showtimesOder   Oder        @relation(fields: [showtimesOderId], references: [id])
+  showtimesOderId Int
+  MovieType       MovieType[]
+  Room            Room[]
 }
 
 model Oder {
   id Int @id @default(autoincrement())
+
+  userOder  User        @relation(fields: [userId], references: [id])
+  userId    Int
+  Showtimes Showtimes[]
+  Coupon    Coupon[]
 }
 
 model Room {
   id          Int    @id @default(autoincrement())
   name        String
   numberChair Int
+
+  showtimesRoom   Showtimes @relation(fields: [showtimesRoomId], references: [id])
+  showtimesRoomId Int
 }
 
 model Coupon {
   id       Int    @id @default(autoincrement())
   name     String
   discount Int
+
+  couponOder   Oder @relation(fields: [couponOderId], references: [id])
+  couponOderId Int
 }
 
 model Slide {
