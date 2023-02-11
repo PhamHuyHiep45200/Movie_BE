@@ -4,7 +4,6 @@ import {
   Post,
   Get,
   Put,
-  Delete,
   Param,
   ParseIntPipe,
 } from '@nestjs/common';
