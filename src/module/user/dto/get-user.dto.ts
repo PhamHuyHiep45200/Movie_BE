@@ -6,21 +6,16 @@ import { IsOptional } from 'class-validator';
 export class GetUserDto {
   @Optional()
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   nameUser: string;
 
   @IsOptional()
   @Optional()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   phone: string;
 
   @IsOptional()
   @Optional()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   email: string;
-
-  @IsOptional()
-  @Optional()
-  @ApiProperty()
-  role: Role;
 }
