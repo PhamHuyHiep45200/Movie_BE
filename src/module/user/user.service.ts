@@ -29,16 +29,16 @@ export class UserService {
     }
   }
   async createUser(createUserDto: CreateUserDto) {
-    const data = await this.prisma.user.create({
-      data: createUserDto,
-    });
-    return { status: 200, data };
+    // const data = await this.prisma.user.create({
+    //   data: createUserDto,
+    // });
+    // return { status: 200, data };
   }
   async updateUser(updateUserDto: UpdateUserDto, id_user: number) {
-    const data = this.prisma.user.update({
-      where: { id: id_user },
-      data: updateUserDto,
-    });
-    return { status: 200, data };
+    // const data = this.prisma.user.update({
+    //   where: { id: id_user },
+    //   data: updateUserDto,
+    // });
+    // return { status: 200, data };
   }
 }
