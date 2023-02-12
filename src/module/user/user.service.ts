@@ -14,7 +14,17 @@ export class UserService {
   }
   async getAllUser(getUserDto: GetUserDto) {
     const user = await this.prisma.user.findMany({
-      where: getUserDto,
+      where: {
+        email: {
+          contains: getUserDto.email,
+        },
+        nameUser: {
+          contains: getUserDto.nameUser,
+        },
+        phone: {
+          contains: getUserDto.phone,
+        },
+      },
     });
     return { status: 200, data: user };
   }
@@ -29,16 +39,44 @@ export class UserService {
     }
   }
   async createUser(createUserDto: CreateUserDto) {
-    // const data = await this.prisma.user.create({
-    //   data: createUserDto,
-    // });
-    // return { status: 200, data };
+    const data = await this.prisma.user.create({
+      data: { ...createUserDto, deleteFlg: false },
+    });
+    return { status: 200, data };
   }
-  async updateUser(updateUserDto: UpdateUserDto, id_user: number) {
-    // const data = this.prisma.user.update({
-    //   where: { id: id_user },
-    //   data: updateUserDto,
-    // });
-    // return { status: 200, data };
+  async updateUser(updateUserDto: UpdateUserDto, id: number) {
+    const data = await this.prisma.user.update({
+      where: { id },
+      data: updateUserDto,
+    });
+    return { status: 200, data };
+  }
+  async deleteUser(idUser: number) {
+    let data: any;
+    const user = await this.prisma.user.findFirst({
+      where: { id: idUser, deleteFlg: false },
+    });
+    if (user) {
+      data = await this.prisma.user.update({
+        where: { id: idUser },
+        data: { deleteFlg: true },
+      });
+      return { status: 200, data };
+    }
+    return { message: 'Người dùng không tồn tại hoặc bị khóa' };
+  }
+  async unDeleteUser(idUser: number) {
+    let data: any;
+    const user = await this.prisma.user.findFirst({
+      where: { id: idUser, deleteFlg: true },
+    });
+    if (user) {
+      data = await this.prisma.user.update({
+        where: { id: idUser },
+        data: { deleteFlg: false },
+      });
+      return { status: 200, data };
+    }
+    return { message: 'Người dùng không tồn tại hoặc bị khóa' };
   }
 }

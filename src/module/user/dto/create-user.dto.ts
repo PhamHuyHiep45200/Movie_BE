@@ -16,4 +16,7 @@ export class CreateUserDto {
 
   @ApiProperty()
   role: Role;
+
+  @ApiProperty({ default: false })
+  deleteFlg: boolean;
 }

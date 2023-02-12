@@ -1,31 +1,25 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 import { IsOptional } from 'class-validator';
-import { Optional } from '@nestjs/common';
 
 export class UpdateUserDto {
-  @Optional()
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   nameUser: string;
 
-  @Optional()
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   phone: string;
 
-  @Optional()
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   email: string;
 
-  @Optional()
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   passWord: string;
 
-  @Optional()
-  @IsOptional()
   @ApiProperty()
+  @IsOptional()
   role: Role;
 }
