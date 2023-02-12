@@ -11,7 +11,6 @@ COPY prisma ./prisma/
 RUN yarn install --frozen-lockfile
 
 COPY . .
-RUN NODE_OPTIONS="--max-old-space-size=8192"
 RUN yarn build
 
 FROM node:18-alpine
