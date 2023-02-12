@@ -12,7 +12,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
+RUN NODE_OPTIONS="--max-old-space-size=8192" npm run build
 
 FROM node:18-alpine
 
