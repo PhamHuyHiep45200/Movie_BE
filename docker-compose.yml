@@ -8,7 +8,7 @@ services:
     ports:
       - 5000:3000
     depends_on:
-      - postgresdb
+      - postgres
     environment:
       - DATABASE_URL=postgresql://huyhiep4520:123456@postgresdb:5432/movie_db?schema=public
 
