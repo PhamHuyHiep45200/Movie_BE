@@ -11,14 +11,7 @@ services:
       - postgres
     environment:
       - DATABASE_URL=postgresql://huyhiep4520:123456@postgres:5432/movie_db?schema=public
-    deploy:
-      resources:
-        limits:
-            # cpus: 0.50
-            memory: 2048M
-        reservations:
-            # cpus: 0.25
-            memory: 1536M
+      - GENERATE_SOURCEMAP=false
 
   postgres:
     image: postgres:14
