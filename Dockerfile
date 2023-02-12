@@ -11,7 +11,7 @@ COPY prisma ./prisma/
 RUN npm install
 
 COPY . .
-
+RUN NODE_OPTIONS="--max-old-space-size=8192"
 RUN npm run build
 
 FROM node:18-alpine
