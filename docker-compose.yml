@@ -6,11 +6,11 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 5000:5000
+      - 5000:3000
     depends_on:
       - postgres
-    env_file:
-      - .env
+    environment:
+      - DATABASE_URL=postgresql://huyhiep4520:123456@postgres:5432/movie_db?schema=public
 
   postgres:
     image: postgres:14
