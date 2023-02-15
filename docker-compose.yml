@@ -10,32 +10,4 @@ services:
     depends_on:
       - postgres
     environment:
-      - DATABASE_URL=postgresql://huyhiep4520:123456@postgres:5432/movie_db?schema=public
-
-  postgres:
-    image: postgres:14
-    container_name: postgres
-    restart: always
-    environment:
-      - POSTGRES_DB=movie_db
-      - POSTGRES_USER=huyhiep4520
-      - POSTGRES_PASSWORD=123456
-    ports:
-      - 5432:5432
-    volumes:
-      - postgres:/var/lib/postgresql/data
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
-    volumes:
-      - pgadmin:/var/lib/pgadmin
-    ports:
-      - '9003:80'
-
-volumes:
-  postgres:
-    driver: local
-  pgadmin:
-    driver: local
+      - DATABASE_URL=postgresql://huyhiep4520:123456@database-1.cacqs37jv4xx.ap-southeast-1.rds.amazonaws.com:5432/movie?schema=public
