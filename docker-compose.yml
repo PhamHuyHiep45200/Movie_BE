@@ -8,4 +8,4 @@ services:
     ports:
       - 5000:3000
     environment:
-      - DATABASE_URL=postgresql://huyhiep4520:123456@database-1.cacqs37jv4xx.ap-southeast-1.rds.amazonaws.com:5432/movie?schema=public
+      - DATABASE_URL=postgresql://postgres:phamhuyhiep4520@database-1.cacqs37jv4xx.ap-southeast-1.rds.amazonaws.com:5432/movie?schema=public
