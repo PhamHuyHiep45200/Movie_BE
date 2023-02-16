@@ -29,11 +29,11 @@ model User {
 }
 
 model Movie {
-  id          Int      @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   nameMovie   String
   description String
   author      String
-  thumbnail   String[]
+  thumbnail   Json
   timeMovie   Int
   deleteFlg   Boolean
 
