@@ -15,6 +15,7 @@ services:
       - AWS_ACCESS_KEY_ID=AKIASERX5PITFWCOJHU3
       - AWS_SECRET_ACCESS_KEY=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
       - AWS_BUCKET_NAME='movie-416'
+      - NODE_OPTIONS=--max-old-space-size=8192
 
   postgres:
     image: postgres:14
