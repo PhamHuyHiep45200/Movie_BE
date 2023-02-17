@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { S3 } from 'aws-sdk';
+// import { S3 } from 'aws-sdk';
+import S3 = require('../../node_modules/aws-sdk/clients/s3');
 
 @Injectable()
 export class UploadFileService {
