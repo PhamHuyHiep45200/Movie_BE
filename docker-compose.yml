@@ -29,18 +29,18 @@ services:
       - 5432:5432
     volumes:
       - postgres:/var/lib/postgresql/data
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
-    volumes:
-      - pgadmin:/var/lib/pgadmin
-    ports:
-      - '9003:80'
+#   pgadmin:
+#     image: dpage/pgadmin4
+#     environment:
+#       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+#       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+#     volumes:
+#       - pgadmin:/var/lib/pgadmin
+#     ports:
+#       - '9003:80'
 
-volumes:
-  postgres:
-    driver: local
-  pgadmin:
-    driver: local
+# volumes:
+#   postgres:
+#     driver: local
+#   pgadmin:
+#     driver: local
