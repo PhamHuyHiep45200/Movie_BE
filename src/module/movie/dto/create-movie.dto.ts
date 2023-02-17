@@ -6,18 +6,18 @@ export class CreateMovieDto {
   @IsString()
   nameMovie: string;
 
-  @ApiProperty()
-  @IsString()
-  description: string;
+//   @ApiProperty()
+//   @IsString()
+//   description: string;
 
-  @ApiProperty()
-  @IsString()
-  author: string;
+//   @ApiProperty()
+//   @IsString()
+//   author: string;
 
-  @ApiProperty({ type: 'string', format: 'binary', required: true })
-  thumbnail: Express.Multer.File[];
+//   @ApiProperty({ type: 'string', format: 'binary', required: true })
+//   thumbnail: Express.Multer.File[];
 
-  @ApiProperty()
-  @IsNumber()
-  timeMovie: number;
+//   @ApiProperty()
+//   @IsNumber()
+//   timeMovie: number;
 }
