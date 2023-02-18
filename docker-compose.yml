@@ -11,10 +11,10 @@ services:
       - postgresdb
     environment:
       - DATABASE_URL=postgresql://huyhiep4520:123456@postgresdb:5432/movie_db?schema=public
-      - AWS_REGION=ap-southeast-1
-      - AWS_ACCESS_KEY_ID=AKIASERX5PITFWCOJHU3
-      - AWS_SECRET_ACCESS_KEY=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
-      - AWS_BUCKET_NAME='movie-416'
+#       - AWS_REGION=ap-southeast-1
+#       - AWS_ACCESS_KEY_ID=AKIASERX5PITFWCOJHU3
+#       - AWS_SECRET_ACCESS_KEY=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
+#       - AWS_BUCKET_NAME='movie-416'
 
   postgresdb:
     image: postgres:14
