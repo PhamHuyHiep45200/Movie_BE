@@ -40,7 +40,7 @@ export class UserService {
   }
   async createUser(createUserDto: CreateUserDto) {
     const data = await this.prisma.user.create({
-      data: { ...createUserDto, deleteFlg: false },
+      data: { ...createUserDto, role: 'USER', deleteFlg: false },
     });
     return { status: 200, data };
   }

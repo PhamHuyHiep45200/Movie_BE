@@ -15,8 +15,8 @@ export class CreateUserDto {
   passWord: string;
 
   @ApiProperty()
-  role: Role;
+  role?: Role;
 
   @ApiProperty({ default: false })
-  deleteFlg: boolean;
+  deleteFlg?: boolean;
 }

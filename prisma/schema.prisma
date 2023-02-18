@@ -37,18 +37,18 @@ model Movie {
   timeMovie   Int
   deleteFlg   Boolean
 
-  movieType     MovieType       @relation(fields: [movieTypeId], references: [id])
-  movieTypeId   Int
-  MovieCategory MovieCategory[]
+  movieType   MovieType @relation(fields: [movieTypeId], references: [id])
+  movieTypeId Int
+
+  movieCategoryId Int
+  movieCategory   MovieCategory @relation(fields: [movieCategoryId], references: [id])
 }
 
 model MovieCategory {
   id        Int     @id @default(autoincrement())
   name      String
   deleteFlg Boolean
-
-  movieCategory   Movie @relation(fields: [movieCategoryId], references: [id])
-  movieCategoryId Int
+  Movie     Movie[]
 }
 
 model MovieType {
