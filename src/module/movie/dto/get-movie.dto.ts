@@ -1,30 +1,28 @@
 import { Optional } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import { IsOptional } from 'class-validator';
 
-export class GetUserDto {
+export class GetMovieDto {
   @Optional()
   @IsOptional()
   @ApiProperty({ required: false })
-  nameUser: string;
+  nameMovie: string;
 
   @IsOptional()
   @Optional()
   @ApiProperty({ required: false })
-  phone: string;
+  author: string;
 
   @IsOptional()
   @Optional()
+  @Transform(({ value }) => +value)
   @ApiProperty({ required: false })
-  email: string;
+  skip: number;
 
   @IsOptional()
   @Optional()
+  @Transform(({ value }) => +value)
   @ApiProperty({ required: false })
-  skip: string | number;
-
-  @IsOptional()
-  @Optional()
-  @ApiProperty({ required: false })
-  take: string | number;
+  take: number;
 }

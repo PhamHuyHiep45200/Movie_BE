@@ -25,6 +25,8 @@ export class UserService {
           contains: getUserDto.phone,
         },
       },
+      skip: +getUserDto.skip,
+      take: +getUserDto.take,
     });
     return { status: 200, data: user };
   }

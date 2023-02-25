@@ -9,9 +9,10 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadFileService } from './upload-file.service';
 import { Express } from 'express';
 import { UpLoadFileDto } from './dto/upload-dto';
-import { ApiConsumes } from '@nestjs/swagger';
+import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 
 @Controller('upload-file')
+@ApiTags('upload-file')
 export class UploadFileController {
   constructor(private uploadFileService: UploadFileService) {}
 
