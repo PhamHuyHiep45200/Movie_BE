@@ -8,10 +8,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
-  async getAll() {
-    const user = await this.prisma.user.findMany();
-    return { status: 200, data: user };
-  }
   async getAllUser(getUserDto: GetUserDto) {
     const user = await this.prisma.user.findMany({
       where: {
@@ -25,8 +21,17 @@ export class UserService {
           contains: getUserDto.phone,
         },
       },
-      skip: +getUserDto.skip,
-      take: +getUserDto.take,
+      select: {
+        nameUser: true,
+        phone: true,
+        email: true,
+        createdAt: true,
+        updatedAt: true,
+        role: true,
+        deleteFlg: true,
+      },
+      skip: getUserDto.skip,
+      take: getUserDto.take,
     });
     return { status: 200, data: user };
   }
@@ -34,16 +39,24 @@ export class UserService {
     const user = await this.prisma.user.findFirstOrThrow({
       where: { email: authUserDto.email },
     });
-    if (user && user.passWord === authUserDto.passWord) {
+    if (user && user.password === authUserDto.password) {
       return { status: 200, data: user };
     } else {
       return { message: 'Vui lòng kiểm tra lại thông tin tài khoản!' };
     }
   }
   async createUser(createUserDto: CreateUserDto) {
-    const data = await this.prisma.user.create({
+    const user = await this.prisma.user.findFirst({
+      where: { email: createUserDto.email },
+    });
+    if (user) {
+      return { message: 'Email người dùng đã tồn tại!' };
+    }
+    const result = await this.prisma.user.create({
       data: { ...createUserDto, role: 'USER', deleteFlg: false },
     });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...data } = result;
     return { status: 200, data };
   }
   async updateUser(updateUserDto: UpdateUserDto, id: number) {

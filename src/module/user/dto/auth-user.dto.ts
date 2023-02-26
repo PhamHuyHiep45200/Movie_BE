@@ -5,5 +5,5 @@ export class AuthUserDto {
   email: string;
 
   @ApiProperty()
-  passWord: string;
+  password: string;
 }

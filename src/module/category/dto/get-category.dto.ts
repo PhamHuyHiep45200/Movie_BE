@@ -1,9 +1,22 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class GetCategoryDto {
   @ApiProperty({ required: false })
   @IsString()
   @IsOptional()
   name?: string;
+
+  @ApiProperty({ required: false })
+  @IsNumber()
+  @Transform(({ value }) => +value)
+  @IsOptional()
+  skip?: string;
+
+  @ApiProperty({ required: false })
+  @IsNumber()
+  @Transform(({ value }) => +value)
+  @IsOptional()
+  take?: string;
 }

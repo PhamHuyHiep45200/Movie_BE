@@ -22,7 +22,7 @@ model User {
   nameUser  String
   phone     String
   email     String
-  passWord  String
+  password  String
   deleteFlg Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

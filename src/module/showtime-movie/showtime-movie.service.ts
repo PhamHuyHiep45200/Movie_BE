@@ -30,6 +30,11 @@ export class ShowtimeMovieService {
         deleteFlg: false,
         time: { contains: getShowTimeMovieDto.time },
       },
+      orderBy: {
+        updatedAt: 'desc',
+      },
+      skip: getShowTimeMovieDto.skip,
+      take: getShowTimeMovieDto.take,
     });
     return { status: 200, data };
   }

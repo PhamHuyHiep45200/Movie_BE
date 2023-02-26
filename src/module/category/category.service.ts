@@ -15,6 +15,7 @@ export class CategoryService {
           contains: getCategoryDto.name,
         },
       },
+      orderBy: { updatedAt: 'desc' },
     });
     return { status: 200, data };
   }

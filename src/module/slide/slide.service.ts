@@ -18,6 +18,7 @@ export class SlideService {
       where: {
         deleteFlg: false,
       },
+      orderBy: { id: 'desc' },
     });
     return { status: 200, data };
   }

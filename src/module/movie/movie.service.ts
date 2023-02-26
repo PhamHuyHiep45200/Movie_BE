@@ -23,9 +23,13 @@ export class MovieService {
         author: { contains: getMovie.author },
         nameMovie: { contains: getMovie.nameMovie },
       },
-      include: { movieCategory: true },
+      include: {
+        movieCategory: true,
+        ShowtimesMovie: { include: { showTime: true } },
+      },
       skip: getMovie.skip,
       take: getMovie.take,
+      orderBy: { updatedAt: 'desc' },
     });
     return { status: 200, data };
   }

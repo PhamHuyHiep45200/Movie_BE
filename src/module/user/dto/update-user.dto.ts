@@ -17,7 +17,7 @@ export class UpdateUserDto {
 
   @ApiProperty()
   @IsOptional()
-  passWord: string;
+  password: string;
 
   @ApiProperty()
   @IsOptional()

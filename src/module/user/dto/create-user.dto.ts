@@ -12,7 +12,7 @@ export class CreateUserDto {
   email: string;
 
   @ApiProperty()
-  passWord: string;
+  password: string;
 
   @ApiProperty()
   role?: Role;

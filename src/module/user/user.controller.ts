@@ -20,11 +20,6 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @Get('/user-all')
-  getAll() {
-    return this.userService.getAll();
-  }
-
   @Get()
   getAllUser(@Query() getUserDto: GetUserDto) {
     return this.userService.getAllUser(getUserDto);
