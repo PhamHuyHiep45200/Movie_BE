@@ -7,8 +7,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5000:8000
-    depends_on:
-      - postgres
+#     depends_on:
+#       - postgres
     environment:
       - DATABASE_URL=postgresql://huyhiep4520:123456@postgres:5432/movie_db?schema=public
       - AWS_REGION=ap-southeast-1
