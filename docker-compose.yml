@@ -12,8 +12,8 @@ services:
     environment:
       - DATABASE_URL=postgresql://huyhiep4520:123456@postgresdb:5432/movie_db?schema=public
       - AWS_REGION=ap-southeast-1
-      - AWS_ACCESS_KEY_ID=AKIASERX5PITDJXOM74S
-      - AWS_SECRET_ACCESS_KEY=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
+      - AWS_ACCESS_KEY_ID=AKIA4AOBENU6BLVZKKG6
+      - AWS_SECRET_ACCESS_KEY=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
       - AWS_BUCKET_NAME='movie-416'
 
   postgresdb:
