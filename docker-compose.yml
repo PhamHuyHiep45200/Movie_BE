@@ -7,15 +7,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8000:8000
-    depends_on:
-      - postgresdb
-    environment:
-      - DATABASE_URL=postgresql://huyhiep4520:123456@postgresdb:5432/movie_db?schema=public
-      - AWS_REGION=ap-southeast-1
-      - AWS_ACCESS_KEY_ID=AKIA4AOBENU6BLVZKKG6
-      - AWS_SECRET_ACCESS_KEY=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
-      - AWS_BUCKET_NAME='movie-416'
-
+    env_file:
+      - .env
   postgresdb:
     image: postgres:14
     container_name: postgresdb
