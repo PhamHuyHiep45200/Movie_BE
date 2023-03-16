@@ -22,6 +22,7 @@ export class UserService {
         },
       },
       select: {
+        id: true,
         nameUser: true,
         phone: true,
         email: true,
@@ -30,14 +31,22 @@ export class UserService {
         role: true,
         deleteFlg: true,
       },
+      orderBy: { updatedAt: 'desc' },
       skip: getUserDto.skip,
       take: getUserDto.take,
     });
-    return { status: 200, data: user };
+    const page = await this.prisma.user.count();
+    return {
+      status: 200,
+      data: user,
+      page: getUserDto.take
+        ? Math.floor(page / getUserDto.take) + 1
+        : Math.floor(page / 10) + 1,
+    };
   }
   async getUserById(authUserDto: AuthUserDto) {
     const user = await this.prisma.user.findFirstOrThrow({
-      where: { email: authUserDto.email },
+      where: { email: authUserDto.email, deleteFlg: false },
     });
     if (user && user.password === authUserDto.password) {
       return { status: 200, data: user };

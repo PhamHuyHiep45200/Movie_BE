@@ -17,7 +17,10 @@ export class CategoryService {
       },
       orderBy: { updatedAt: 'desc' },
     });
-    return { status: 200, data };
+    return {
+      status: 200,
+      data,
+    };
   }
   async createCategory(createCategoryDto: CreateCategoryDto) {
     const data = await this.prisma.movieCategory.create({

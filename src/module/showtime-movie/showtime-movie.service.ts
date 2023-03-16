@@ -36,7 +36,14 @@ export class ShowtimeMovieService {
       skip: getShowTimeMovieDto.skip,
       take: getShowTimeMovieDto.take,
     });
-    return { status: 200, data };
+    const page = await this.prisma.showtimes.count();
+    return {
+      status: 200,
+      data,
+      page: getShowTimeMovieDto.take
+        ? Math.floor(page / getShowTimeMovieDto.take) + 1
+        : Math.floor(page / 10) + 1,
+    };
   }
 
   async updateShowtimeMovie(

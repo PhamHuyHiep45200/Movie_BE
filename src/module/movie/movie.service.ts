@@ -31,7 +31,14 @@ export class MovieService {
       take: getMovie.take,
       orderBy: { updatedAt: 'desc' },
     });
-    return { status: 200, data };
+    const page = await this.prisma.movie.count();
+    return {
+      status: 200,
+      data,
+      page: getMovie.take
+        ? Math.floor(page / getMovie.take) + 1
+        : Math.floor(page / 10) + 1,
+    };
   }
   async updateMovieService(id: number, updateMoviedto: UpdateMovieDto) {
     const data = await this.prisma.movie.update({
