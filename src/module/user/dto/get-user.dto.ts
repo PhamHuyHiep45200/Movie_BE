@@ -27,4 +27,8 @@ export class GetUserDto {
   @Transform(({ value }) => +value)
   @ApiProperty({ required: false })
   take: number;
+
+  @IsOptional()
+  @ApiProperty({ required: false })
+  deleteFlg: boolean;
 }

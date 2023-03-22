@@ -25,4 +25,9 @@ export class GetMovieDto {
   @Transform(({ value }) => +value)
   @ApiProperty({ required: false })
   take: number;
+
+  @IsOptional()
+  @Optional()
+  @ApiProperty({ required: false })
+  deleteFlg: boolean;
 }

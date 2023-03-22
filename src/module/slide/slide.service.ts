@@ -15,9 +15,6 @@ export class SlideService {
 
   async getSlide() {
     const data = await this.prisma.slide.findMany({
-      where: {
-        deleteFlg: false,
-      },
       orderBy: { id: 'desc' },
     });
     return { status: 200, data };

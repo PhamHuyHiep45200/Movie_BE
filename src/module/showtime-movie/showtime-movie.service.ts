@@ -27,7 +27,7 @@ export class ShowtimeMovieService {
   async getShowtimeMovie(getShowTimeMovieDto: GetShowTimeMovieDto) {
     const data = await this.prisma.showtimes.findMany({
       where: {
-        deleteFlg: false,
+        deleteFlg: getShowTimeMovieDto.deleteFlg,
         time: { contains: getShowTimeMovieDto.time },
       },
       orderBy: {

@@ -19,7 +19,7 @@ export class MovieService {
   async getMovie(getMovie: GetMovieDto) {
     const data = await this.prisma.movie.findMany({
       where: {
-        deleteFlg: false,
+        deleteFlg: getMovie.deleteFlg,
         author: { contains: getMovie.author },
         nameMovie: { contains: getMovie.nameMovie },
       },

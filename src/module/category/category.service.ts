@@ -10,7 +10,7 @@ export class CategoryService {
   async getCategory(getCategoryDto: GetCategoryDto) {
     const data = await this.prisma.movieCategory.findMany({
       where: {
-        deleteFlg: false,
+        deleteFlg: getCategoryDto.deleteFlg,
         name: {
           contains: getCategoryDto.name,
         },

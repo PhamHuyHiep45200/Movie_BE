@@ -1,27 +1,28 @@
+import { Optional } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
-export class GetShowTimeMovieDto {
+export class GetRoomDto {
   @ApiProperty({ required: false })
-  @IsOptional()
   @IsString()
-  time: string;
-
-  @ApiProperty({ required: false })
-  @IsNumber()
   @IsOptional()
-  @Transform(({ value }) => +value)
-  skip: number;
-
-  @ApiProperty({ required: false })
-  @IsNumber()
-  @IsOptional()
-  @Transform(({ value }) => +value)
-  take: number;
+  name: string;
 
   @ApiProperty({ required: false })
   @IsBoolean()
   @IsOptional()
   deleteFlg: boolean;
+
+  @IsOptional()
+  @Optional()
+  @Transform(({ value }) => +value)
+  @ApiProperty({ required: false })
+  skip: number;
+
+  @IsOptional()
+  @Optional()
+  @Transform(({ value }) => +value)
+  @ApiProperty({ required: false })
+  take: number;
 }

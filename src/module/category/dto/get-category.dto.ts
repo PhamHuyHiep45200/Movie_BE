@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class GetCategoryDto {
   @ApiProperty({ required: false })
@@ -19,4 +19,9 @@ export class GetCategoryDto {
   @Transform(({ value }) => +value)
   @IsOptional()
   take?: string;
+
+  @ApiProperty({ required: false })
+  @IsBoolean()
+  @IsOptional()
+  deleteFlg: boolean;
 }
