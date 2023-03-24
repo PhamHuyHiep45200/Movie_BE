@@ -1,7 +1,11 @@
-import { Optional } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsNumber, IsOptional } from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional } from 'class-validator';
+
+// enum TypeUser {
+//   False,
+//   True=True,
+// }
 
 export class GetUserDto {
   @IsOptional()
@@ -29,6 +33,11 @@ export class GetUserDto {
   take: number;
 
   @IsOptional()
-  @ApiProperty({ required: false })
+  @IsBoolean()
+  @ApiProperty({ required: false, default: false })
+  @Transform(({ value }) => {
+    if (value === 'true') return true;
+    return false;
+  })
   deleteFlg: boolean;
 }
