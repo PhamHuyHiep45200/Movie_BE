@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { PrismaModule } from 'src/prisma.module';
 import { RoomController } from './room.controller';
 import { RoomService } from './room.service';
+import { PrismaModule } from 'src/prisma.module';
 
 @Module({
   controllers: [RoomController],
