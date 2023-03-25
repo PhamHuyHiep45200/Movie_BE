@@ -63,7 +63,7 @@ export class UploadFileController {
     files.forEach((file) => {
       const fileReponse = {
         originalname: file.originalname,
-        filename: `http://localhost:8000/upload-file/get-file/${file.filename}`,
+        url: `http://localhost:8000/upload-file/get-file/${file.filename}`,
       };
       response.push(fileReponse);
     });
