@@ -19,7 +19,7 @@ export class SlideController {
   constructor(private slideService: SlideService) {}
 
   @Post()
-  createSlide(@Body() createSlide: CreateSlide[]) {
+  createSlide(@Body() createSlide: CreateSlide) {
     return this.slideService.createSlide(createSlide);
   }
   @Get()

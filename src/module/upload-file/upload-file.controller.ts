@@ -13,7 +13,7 @@ import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { UploadFileService } from './upload-file.service';
 import { Express, Response } from 'express';
 import { UpLoadFileDto } from './dto/upload-dto';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import {
   ApiMultiFile,
   editFileName,
@@ -32,17 +32,55 @@ export class UploadFileController {
   }
 
   @Post()
+  // s3
+  // @ApiConsumes('multipart/form-data')
+  // @UseInterceptors(FileInterceptor('file'))
+  // async uploadFile(
+  //   @Body() data: UpLoadFileDto,
+  //   @UploadedFile() file: Express.Multer.File,
+  // ): Promise<any> {
+  //   return await this.uploadFileService.uploadFile(
+  //     file.buffer,
+  //     file.originalname,
+  //   );
+  // }
+
+  //local
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
   @ApiConsumes('multipart/form-data')
+  // @UseInterceptors(
+  //   FilesInterceptor('file', 1, {
+  //     storage: diskStorage({
+  //       destination: './files',
+  //       filename: editFileName,
+  //     }),
+  //     fileFilter: imageFileFilter,
+  //   }),
+  // )
+  // @UseInterceptors(
+  //   FilesInterceptor('file', 1, {
+  //     storage: diskStorage({
+  //       destination: './files',
+  //       filename: editFileName,
+  //     }),
+  //     fileFilter: imageFileFilter,
+  //   }),
+  // )
   @UseInterceptors(FileInterceptor('file'))
-  async uploadFile(
-    @Body() data: UpLoadFileDto,
-    @UploadedFile() file: Express.Multer.File,
-  ): Promise<any> {
-    return await this.uploadFileService.uploadFile(
-      file.buffer,
-      file.originalname,
-    );
+  uploadFile2(@UploadedFile('file') file) {
+    console.log(file);
   }
+
   @Post('upload-multi')
   @ApiConsumes('multipart/form-data')
   @ApiMultiFile()
@@ -67,6 +105,6 @@ export class UploadFileController {
       };
       response.push(fileReponse);
     });
-    return response;
+    return { status: 200, data: response };
   }
 }
