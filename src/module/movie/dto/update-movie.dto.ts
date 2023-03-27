@@ -29,7 +29,6 @@ export class UpdateMovieDto {
   category: number;
 
   @ApiProperty()
-  @IsNumber()
   @IsOptional()
   thumbnail: string[];
 
