@@ -37,7 +37,7 @@ export class GetUserDto {
   @ApiProperty({ required: false, default: false })
   @Transform(({ value }) => {
     if (value === 'true') return true;
-    return false;
+    if (value === 'false') return false;
   })
   deleteFlg: boolean;
 }

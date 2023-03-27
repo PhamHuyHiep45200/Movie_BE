@@ -36,8 +36,8 @@ export class MovieService {
       status: 200,
       data,
       page: getMovie.take
-        ? Math.floor(page / getMovie.take) + 1
-        : Math.floor(page / 10) + 1,
+        ? Math.floor(data.length / getMovie.take) + 1
+        : Math.floor(data.length / 10) + 1,
     };
   }
   async updateMovieService(id: number, updateMoviedto: UpdateMovieDto) {
