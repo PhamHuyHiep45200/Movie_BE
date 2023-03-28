@@ -9,7 +9,7 @@ export class MovieService {
   constructor(private prisma: PrismaService) {}
   async createMovie(createMovieDto: CreateMovieDto) {
     const data = await this.prisma.movie.create({
-      data: { ...createMovieDto },
+      data: { ...createMovieDto,deleteFlg:false },
     });
     return {
       status: 200,
