@@ -42,6 +42,7 @@ export class RoomService {
       },
       data: {
         name: updateRoomDto.name,
+        numberChair: updateRoomDto.numberChair,
       },
     });
     return { status: 200, data: room };
