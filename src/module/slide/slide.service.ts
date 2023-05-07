@@ -6,18 +6,15 @@ import { UpdateSlide } from './dto/update-slide.dto';
 @Injectable()
 export class SlideService {
   constructor(private prisma: PrismaService) {}
-  async createSlide(createSlide: CreateSlide[]) {
-    const data = await this.prisma.slide.createMany({
-      data: [...createSlide],
+  async createSlide(createSlide: CreateSlide) {
+    const data = await this.prisma.slide.create({
+      data: createSlide,
     });
     return { status: 200, data };
   }
 
   async getSlide() {
     const data = await this.prisma.slide.findMany({
-      where: {
-        deleteFlg: false,
-      },
       orderBy: { id: 'desc' },
     });
     return { status: 200, data };

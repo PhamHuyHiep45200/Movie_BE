@@ -8,9 +8,9 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 export class CategoryService {
   constructor(private prisma: PrismaService) {}
   async getCategory(getCategoryDto: GetCategoryDto) {
-    const data = await this.prisma.movieCategory.findMany({
+    const data = await this.prisma.category.findMany({
       where: {
-        deleteFlg: false,
+        deleteFlg: getCategoryDto.deleteFlg,
         name: {
           contains: getCategoryDto.name,
         },
@@ -23,7 +23,7 @@ export class CategoryService {
     };
   }
   async createCategory(createCategoryDto: CreateCategoryDto) {
-    const data = await this.prisma.movieCategory.create({
+    const data = await this.prisma.category.create({
       data: { ...createCategoryDto, deleteFlg: false },
     });
     return { status: 200, data };
@@ -32,21 +32,21 @@ export class CategoryService {
     id_category: number,
     updateCategoryDto: UpdateCategoryDto,
   ) {
-    const data = await this.prisma.movieCategory.update({
+    const data = await this.prisma.category.update({
       where: { id: id_category },
       data: { ...updateCategoryDto },
     });
     return { status: 200, data };
   }
   async deleteCategory(id_category: number) {
-    const data = await this.prisma.movieCategory.update({
+    const data = await this.prisma.category.update({
       where: { id: id_category },
       data: { deleteFlg: true },
     });
     return { status: 200, data };
   }
   async unDeleteCategory(id_category: number) {
-    const data = await this.prisma.movieCategory.update({
+    const data = await this.prisma.category.update({
       where: { id: id_category },
       data: { deleteFlg: false },
     });

@@ -20,6 +20,10 @@ export class CreateMovieDto {
 
   @ApiProperty()
   @IsNumber()
+  categoryId: number;
+
+  @ApiProperty()
+  @IsNumber()
   movieCategoryId: number;
 
   @ApiProperty()

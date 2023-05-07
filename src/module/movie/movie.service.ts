@@ -9,7 +9,7 @@ export class MovieService {
   constructor(private prisma: PrismaService) {}
   async createMovie(createMovieDto: CreateMovieDto) {
     const data = await this.prisma.movie.create({
-      data: { ...createMovieDto },
+      data: { ...createMovieDto, deleteFlg: false },
     });
     return {
       status: 200,
@@ -19,13 +19,13 @@ export class MovieService {
   async getMovie(getMovie: GetMovieDto) {
     const data = await this.prisma.movie.findMany({
       where: {
-        deleteFlg: false,
+        deleteFlg: getMovie.deleteFlg,
         author: { contains: getMovie.author },
         nameMovie: { contains: getMovie.nameMovie },
       },
       include: {
         movieCategory: true,
-        ShowtimesMovie: { include: { showTime: true } },
+        ShowtimesMovie: { include: { movieShowtime: true } },
       },
       skip: getMovie.skip,
       take: getMovie.take,
@@ -36,8 +36,8 @@ export class MovieService {
       status: 200,
       data,
       page: getMovie.take
-        ? Math.floor(page / getMovie.take) + 1
-        : Math.floor(page / 10) + 1,
+        ? Math.floor(data.length / getMovie.take) + 1
+        : Math.floor(data.length / 10) + 1,
     };
   }
   async updateMovieService(id: number, updateMoviedto: UpdateMovieDto) {

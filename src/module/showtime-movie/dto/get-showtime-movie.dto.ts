@@ -34,4 +34,9 @@ export class GetShowTimeMovieDto {
   @IsOptional()
   @Transform(({ value }) => +value)
   take: number;
+
+  @ApiProperty({ required: false })
+  @IsBoolean()
+  @IsOptional()
+  deleteFlg: boolean;
 }

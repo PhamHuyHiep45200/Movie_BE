@@ -20,6 +20,7 @@ export class UserService {
         phone: {
           contains: getUserDto.phone,
         },
+        deleteFlg: getUserDto.deleteFlg,
       },
       select: {
         id: true,
@@ -35,13 +36,12 @@ export class UserService {
       skip: getUserDto.skip,
       take: getUserDto.take,
     });
-    const page = await this.prisma.user.count();
     return {
       status: 200,
       data: user,
       page: getUserDto.take
-        ? Math.floor(page / getUserDto.take) + 1
-        : Math.floor(page / 10) + 1,
+        ? Math.floor(user.length / getUserDto.take) + 1
+        : Math.floor(user.length / 10) + 1,
     };
   }
   async getUserById(authUserDto: AuthUserDto) {
