@@ -1,37 +1,31 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsDate, IsNumber, IsOptional } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class GetShowTimeMovieDto {
+export class GetCouponDto {
   @ApiProperty({ required: false })
+  @IsString()
   @IsOptional()
-  @IsBoolean()
-  status: string;
-
-  @ApiProperty({ required: false })
-  @IsOptional()
-  @IsNumber()
-  price: number;
+  name: string;
 
   @ApiProperty({ required: false })
+  @IsString()
   @IsOptional()
-  @IsDate()
-  timeStart: Date;
+  timeStart: string;
 
   @ApiProperty({ required: false })
-  @IsOptional()
-  @IsDate()
-  timeEnd: Date;
+  @IsString()
+  timeEnd: string;
 
   @ApiProperty({ required: false })
   @IsNumber()
-  @IsOptional()
   @Transform(({ value }) => +value)
-  skip: number;
+  @IsOptional()
+  skip?: number;
 
   @ApiProperty({ required: false })
   @IsNumber()
-  @IsOptional()
   @Transform(({ value }) => +value)
-  take: number;
+  @IsOptional()
+  take?: number;
 }

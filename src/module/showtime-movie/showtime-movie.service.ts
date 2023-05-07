@@ -9,26 +9,16 @@ export class ShowtimeMovieService {
   constructor(private prisma: PrismaService) {}
 
   async createShowtimeMovie(createShowTimeMovieDto: CreateShowTimeMovieDto) {
-    const data = await this.prisma.showtimes.create({
-      data: {
-        time: createShowTimeMovieDto.time,
-        scheduledFare: createShowTimeMovieDto.scheduledFare,
-        deleteFlg: false,
-        ShowtimesMovie: {
-          create: {
-            idMovie: createShowTimeMovieDto.idMovie,
-          },
-        },
-      },
+    const data = await this.prisma.showtimesMovie.create({
+      data: { ...createShowTimeMovieDto, deleteFlg: false },
     });
     return { status: 200, data };
   }
 
   async getShowtimeMovie(getShowTimeMovieDto: GetShowTimeMovieDto) {
-    const data = await this.prisma.showtimes.findMany({
+    const data = await this.prisma.showtimesMovie.findMany({
       where: {
         deleteFlg: false,
-        time: { contains: getShowTimeMovieDto.time },
       },
       orderBy: {
         updatedAt: 'desc',
@@ -36,21 +26,29 @@ export class ShowtimeMovieService {
       skip: getShowTimeMovieDto.skip,
       take: getShowTimeMovieDto.take,
     });
-    const page = await this.prisma.showtimes.count();
+    const page = await this.prisma.showtimesMovie.findMany({
+      where: { deleteFlg: false },
+    });
     return {
       status: 200,
       data,
+      count: page.length,
       page: getShowTimeMovieDto.take
-        ? Math.floor(page / getShowTimeMovieDto.take) + 1
-        : Math.floor(page / 10) + 1,
+        ? Math.floor(page.length / getShowTimeMovieDto.take) + 1
+        : Math.floor(page.length / 10) + 1,
     };
   }
-
+  async getShowtimeMovieById(id: number) {
+    const data = await this.prisma.showtimesMovie.findFirst({
+      where: { id },
+    });
+    return { status: 200, data };
+  }
   async updateShowtimeMovie(
     id: number,
     updateShowTimeMovieDto: UpdateShowTimeMovieDto,
   ) {
-    const data = await this.prisma.showtimes.update({
+    const data = await this.prisma.showtimesMovie.update({
       where: { id },
       data: { ...updateShowTimeMovieDto },
     });
@@ -58,7 +56,7 @@ export class ShowtimeMovieService {
   }
 
   async deleteShowtimeMovie(id: number) {
-    const data = await this.prisma.showtimes.update({
+    const data = await this.prisma.showtimesMovie.update({
       where: { id },
       data: { deleteFlg: true },
     });
@@ -66,7 +64,7 @@ export class ShowtimeMovieService {
   }
 
   async unDeleteShowtimeMovie(id: number) {
-    const data = await this.prisma.showtimes.update({
+    const data = await this.prisma.showtimesMovie.update({
       where: { id },
       data: { deleteFlg: false },
     });

@@ -18,36 +18,33 @@ enum CategoryType {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        Int         @id @default(autoincrement())
   nameUser  String
   phone     String
   email     String
   password  String
   deleteFlg Boolean
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  role      Role
-  Oder      Oder[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  BookMovie BookMovie[]
 }
 
 model Movie {
-  id          Int      @id @default(autoincrement())
-  nameMovie   String
-  description String
-  author      String
-  timeMovie   Int
-  thumbnail   String[]
-  deleteFlg   Boolean
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  movieCategoryId Int?
-  movieCategory   MovieCategory? @relation(fields: [movieCategoryId], references: [id])
-
+  id             Int              @id @default(autoincrement())
+  nameMovie      String
+  description    String
+  author         String
+  timeMovie      Int
+  thumbnail      String[]
+  deleteFlg      Boolean
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  categoryId     Int
+  movieCategory  Category         @relation(fields: [categoryId], references: [id])
   ShowtimesMovie ShowtimesMovie[]
 }
 
-model MovieCategory {
+model Category {
   id        Int      @id @default(autoincrement())
   name      String
   deleteFlg Boolean
@@ -57,64 +54,68 @@ model MovieCategory {
 }
 
 model ShowtimesMovie {
-  id         Int @id @default(autoincrement())
-  idShowTime Int
-  idMovie    Int
-
-  movie     Movie     @relation(fields: [idMovie], references: [id])
-  showTime  Showtimes @relation(fields: [idShowTime], references: [id])
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-}
-
-model Showtimes {
-  id            Int      @id @default(autoincrement())
-  time          String
-  scheduledFare Int
-  deleteFlg     Boolean
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  Room           Room[]
-  ShowtimesMovie ShowtimesMovie[]
-  Oder           Oder[]
-}
-
-model Oder {
   id        Int      @id @default(autoincrement())
+  idRoom    Int
+  idMovie   Int
+  timeStart DateTime
+  timeEnd   DateTime
+  price     Int
   deleteFlg Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId         Int
-  userOder       User      @relation(fields: [userId], references: [id])
-  showtimesId    Int
-  showtimesOrder Showtimes @relation(fields: [showtimesId], references: [id])
-  Coupon         Coupon[]
+  movieShowtime Movie       @relation(fields: [idMovie], references: [id])
+  roomShowtime  Room        @relation(fields: [idRoom], references: [id])
+  BookMovie     BookMovie[]
 }
 
 model Room {
-  id          Int      @id @default(autoincrement())
-  name        String
-  numberChair Int
-  deleteFlg   Boolean
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id             Int              @id @default(autoincrement())
+  name           String
+  numberChair    Int
+  deleteFlg      Boolean
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  ShowtimesMovie ShowtimesMovie[]
+}
 
-  showtimesRoom   Showtimes @relation(fields: [showtimesRoomId], references: [id])
-  showtimesRoomId Int
+model BookMovie {
+  id               Int               @id @default(autoincrement())
+  status           Boolean
+  userId           Int
+  couponId         Int
+  showtimesMovieId Int
+  deleteFlg        Boolean
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  showtimeBook     ShowtimesMovie    @relation(fields: [showtimesMovieId], references: [id])
+  userBook         User              @relation(fields: [userId], references: [id])
+  couponBook       Coupon            @relation(fields: [couponId], references: [id])
+  BookMovieDetail  BookMovieDetail[]
+}
+
+model BookMovieDetail {
+  id              Int       @id @default(autoincrement())
+  orderId         Int
+  price           Int
+  chairs          Int[]
+  deleteFlg       Boolean
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  detailBookMovie BookMovie @relation(fields: [orderId], references: [id])
 }
 
 model Coupon {
-  id        Int      @id @default(autoincrement())
+  id        Int         @id @default(autoincrement())
   name      String
+  timeStart DateTime
+  timeEnd   DateTime
+  code      String
   discount  Int
   deleteFlg Boolean
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  couponOder   Oder @relation(fields: [couponOderId], references: [id])
-  couponOderId Int
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  BookMovie BookMovie[]
 }
 
 model Slide {

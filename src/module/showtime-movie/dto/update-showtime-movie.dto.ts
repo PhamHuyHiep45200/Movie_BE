@@ -1,14 +1,29 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNumber, IsOptional } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsDate } from 'class-validator';
 
 export class UpdateShowTimeMovieDto {
   @ApiProperty()
+  @IsNumber()
   @IsOptional()
-  @IsString()
-  time: string;
+  idRoom: number;
 
   @ApiProperty()
-  @IsOptional()
   @IsNumber()
-  scheduledFare: number;
+  @IsOptional()
+  idMovie: number;
+
+  @ApiProperty()
+  @IsDate()
+  @IsOptional()
+  timeStart: Date;
+
+  @ApiProperty()
+  @IsDate()
+  @IsOptional()
+  timeEnd: Date;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsOptional()
+  price: number;
 }

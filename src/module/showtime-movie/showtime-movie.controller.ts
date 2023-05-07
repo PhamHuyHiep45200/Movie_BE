@@ -31,6 +31,11 @@ export class ShowtimeMovieController {
     return this.showtimeMovieService.getShowtimeMovie(getShowTimeMovieDto);
   }
 
+  @Get('/:id')
+  getShowtimeMovieById(@Param('id', ParseIntPipe) id: number) {
+    return this.showtimeMovieService.getShowtimeMovieById(id);
+  }
+
   @Put('/update/:id')
   updateShowtimeMovie(
     @Param('id', ParseIntPipe) id: number,
