@@ -29,6 +29,11 @@ export class MovieController {
     return this.movieService.getMovie(getMovieDto);
   }
 
+  // @Get('/product-new')
+  // getMovieNew(@Query() getMovieDto: GetMovieDto) {
+  //   return this.movieService.getMovieNew(getMovieDto);
+  // }
+
   @Put('/update/:id')
   updateMovie(
     @Param('id', ParseIntPipe) id: number,

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
+import { CreateMultiShowTimeMovieDto } from './dto/create-multi-showtime-movie.dto';
 import { CreateShowTimeMovieDto } from './dto/create-showtime-movie.dto';
 import { GetShowTimeMovieDto } from './dto/get-showtime-movie.dto';
 import { UpdateShowTimeMovieDto } from './dto/update-showtime-movie.dto';
@@ -11,6 +12,28 @@ export class ShowtimeMovieService {
   async createShowtimeMovie(createShowTimeMovieDto: CreateShowTimeMovieDto) {
     const data = await this.prisma.showtimesMovie.create({
       data: { ...createShowTimeMovieDto, deleteFlg: false },
+    });
+    return { status: 200, data };
+  }
+
+  async createMultiShowtimeMovie(
+    createMultiShowTimeMovieDto: CreateMultiShowTimeMovieDto,
+  ) {
+    const dataRoomFormat = createMultiShowTimeMovieDto.idRoom.map(
+      (e: number) => {
+        return {
+          idRoom: e,
+          idMovie: createMultiShowTimeMovieDto.idMovie,
+          timeStart: createMultiShowTimeMovieDto.timeStart,
+          timeEnd: createMultiShowTimeMovieDto.timeEnd,
+          price: createMultiShowTimeMovieDto.price,
+          deleteFlg: false,
+        };
+      },
+    );
+    const data = await this.prisma.showtimesMovie.createMany({
+      data: dataRoomFormat,
+      skipDuplicates: true,
     });
     return { status: 200, data };
   }

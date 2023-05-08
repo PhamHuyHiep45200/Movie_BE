@@ -9,6 +9,7 @@ import {
   Param,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateMultiShowTimeMovieDto } from './dto/create-multi-showtime-movie.dto';
 import { CreateShowTimeMovieDto } from './dto/create-showtime-movie.dto';
 import { GetShowTimeMovieDto } from './dto/get-showtime-movie.dto';
 import { UpdateShowTimeMovieDto } from './dto/update-showtime-movie.dto';
@@ -23,6 +24,15 @@ export class ShowtimeMovieController {
   createShowtimeMovie(@Body() createShowTimeMovieDto: CreateShowTimeMovieDto) {
     return this.showtimeMovieService.createShowtimeMovie(
       createShowTimeMovieDto,
+    );
+  }
+
+  @Post('/create-multi-room')
+  createMultiShowtimeMovie(
+    @Body() createMultiShowTimeMovieDto: CreateMultiShowTimeMovieDto,
+  ) {
+    return this.showtimeMovieService.createMultiShowtimeMovie(
+      createMultiShowTimeMovieDto,
     );
   }
 
