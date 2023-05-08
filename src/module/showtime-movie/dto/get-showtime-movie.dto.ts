@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsDate, IsNumber, IsOptional } from 'class-validator';
+import { IsBoolean, IsDateString, IsNumber, IsOptional } from 'class-validator';
 
 export class GetShowTimeMovieDto {
   @ApiProperty({ required: false })
@@ -15,12 +15,12 @@ export class GetShowTimeMovieDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsDate()
+  @IsDateString()
   timeStart: Date;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsDate()
+  @IsDateString()
   timeEnd: Date;
 
   @ApiProperty({ required: false })

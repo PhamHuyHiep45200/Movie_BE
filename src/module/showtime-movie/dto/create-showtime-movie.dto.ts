@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsDateString, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateShowTimeMovieDto {
   @ApiProperty()
@@ -9,10 +9,10 @@ export class CreateShowTimeMovieDto {
   @IsNumber()
   idMovie: number;
   @ApiProperty()
-  @IsDate()
+  @IsDateString()
   timeStart: Date;
   @ApiProperty()
-  @IsDate()
+  @IsDateString()
   timeEnd: Date;
   @ApiProperty()
   @IsNumber()

@@ -31,10 +31,13 @@ export class MovieService {
       take: getMovie.take,
       orderBy: { updatedAt: 'desc' },
     });
-    const page = await this.prisma.movie.count();
+    const page = await this.prisma.movie.findMany({
+      where: { deleteFlg: false },
+    });
     return {
       status: 200,
       data,
+      count: page,
       page: getMovie.take
         ? Math.floor(data.length / getMovie.take) + 1
         : Math.floor(data.length / 10) + 1,

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsDateString, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateCouponDto {
   @ApiProperty()
@@ -7,11 +7,11 @@ export class CreateCouponDto {
   name: string;
 
   @ApiProperty()
-  @IsDate()
+  @IsDateString()
   timeStart: Date;
 
   @ApiProperty()
-  @IsDate()
+  @IsDateString()
   timeEnd: Date;
 
   @ApiProperty()

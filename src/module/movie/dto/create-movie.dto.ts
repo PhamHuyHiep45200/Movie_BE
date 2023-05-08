@@ -23,10 +23,6 @@ export class CreateMovieDto {
   categoryId: number;
 
   @ApiProperty()
-  @IsNumber()
-  movieCategoryId: number;
-
-  @ApiProperty()
   thumbnail: string[];
 
   @ApiProperty({ default: false })
