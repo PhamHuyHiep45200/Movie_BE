@@ -29,8 +29,8 @@ export class GetMovieDto {
   @IsOptional()
   @Optional()
   @Transform(({ value }) => {
-    if (value) {
-      return value;
+    if (value === 'true') {
+      return true;
     }
     return false;
   })
