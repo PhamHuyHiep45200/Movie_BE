@@ -43,6 +43,19 @@ export class ShowtimeMovieService {
       where: {
         deleteFlg: false,
       },
+      include: {
+        roomShowtime: {
+          select: {
+            name: true,
+          },
+        },
+        movieShowtime: {
+          select: {
+            nameMovie: true,
+            timeMovie: true,
+          },
+        }
+      },
       orderBy: {
         updatedAt: 'desc',
       },

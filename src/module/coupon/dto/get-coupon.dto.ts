@@ -15,6 +15,7 @@ export class GetCouponDto {
 
   @ApiProperty({ required: false })
   @IsString()
+  @IsOptional()
   timeEnd: string;
 
   @ApiProperty({ required: false })
